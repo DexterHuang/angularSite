@@ -1,0 +1,45 @@
+<div *ngIf="!name; else forminfo" class="container">
+  <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+    <h1>My Reactive Form</h1>
+    <div class="form-group">
+      <label for="">Title
+                    <input type="text" formControlName="title">
+                </label>
+      <div class="alert" *ngIf="!rForm.controls['title'].valid && rForm.controls['title'].touched">
+        {{titleAlert}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Description
+                    <textarea formControlName="description"></textarea>
+                </label>
+      <div class="alert" *ngIf="!rForm.controls['description'].valid && rForm.controls['description'].touched">
+        pls type more
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div ng2FileDrop class="custom-component-drop-zone" (ng2FileDropHoverStart)="dragFileOverStart()" (ng2FileDropHoverEnd)="dragFileOverEnd()"
+        (ng2FileDropFileAccepted)="dragFileAccepted($event)" (ng2FileDropFileRejected)="dragFileRejected($event)">
+        <h3>{{this.dropStatus}}</h3>
+      </div>
+
+      <div *ngFor="let file of imageFiles">
+        <img src={{file.url}} alt="">
+
+      </div>
+    </div>
+    <input type="submit" class="button expanded" value="Submit Form" [disabled]="!rForm.valid">
+  </form>
+</div>
+
+<ng-template #forminfo>
+  <div class="form-container">
+    <div class="row columns">
+      <h1>{{name}}</h1>
+      <p>{{description}}</p>
+    </div>
+
+  </div>
+</ng-template>

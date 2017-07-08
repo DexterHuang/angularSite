@@ -1,0 +1,7 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <input type=" text " formControlName="username">
+    <input type="password " formControlName="password">
+    <input type="submit" (onSubmit)="onSubmit() ">
+  </form>
+</div>
